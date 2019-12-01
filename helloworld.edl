@@ -1,0 +1,15 @@
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
+enclave {
+    trusted {
+
+    public int ecall_run([in, size=input_len] const char *input,
+                         uint64_t input_len,
+                         [ user_check] char **output,
+                         [out] uint64_t *output_len);
+    };
+
+};
+
+
