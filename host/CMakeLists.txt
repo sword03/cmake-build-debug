@@ -33,6 +33,6 @@ target_include_directories(helloworld_host PRIVATE
         # Needed for the generated file helloworld_u.h
         ${CMAKE_CURRENT_BINARY_DIR} ${PROTOBUF_LIBRARY_DIRS})
 
-target_link_libraries(helloworld_host openenclave::oehostapp ${PROTOBUF_LDFLAGS})
+target_link_libraries(helloworld_host ${PROTOBUF_LDFLAGS}  -Wl,-version-script=${CMAKE_CURRENT_SOURCE_DIR}/version.file openenclave::oehostapp)
 
 message(STATUS "\n\n")

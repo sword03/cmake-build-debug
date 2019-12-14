@@ -3,6 +3,8 @@ cmake_minimum_required(VERSION 3.13)
 find_package(OpenEnclave CONFIG REQUIRED)
 
 set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_C_COMPILER "/usr/bin/gcc")
+set(CMAKE_CXX_COMPILER "/usr/bin/g++")
 
 
 add_subdirectory(enclave)
@@ -25,9 +27,14 @@ add_custom_target(sign ALL DEPENDS enclave/enclave.signed)
 if ((NOT DEFINED ENV{OE_SIMULATION}) OR (NOT $ENV{OE_SIMULATION}))
     add_custom_target(run
             DEPENDS helloworld_host sign
-            COMMAND helloworld_host ${CMAKE_SOURCE_DIR}/enclave/enclave.signed)
+            COMMAND helloworld_host ${CMAKE_BINARY_DIR}/enclave/enclave.signed)
+    message("target run     : helloworld_host ${CMAKE_BINARY_DIR}/enclave/enclave.signed")
 endif ()
 
 add_custom_target(simulate
         DEPENDS helloworld_host sign
-        COMMAND helloworld_host ${CMAKE_SOURCE_DIR}/enclave/enclave.signed --simulate)
+        COMMAND helloworld_host ${CMAKE_BINARY_DIR}/enclave/enclave.signed --simulate)
+message("target simulate: helloworld_host ${CMAKE_BINARY_DIR}/enclave/enclave.signed --simulate")
+
+message(STATUS "CMAKE_CURRENT_SOURCE_DIR = ${CMAKE_CURRENT_SOURCE_DIR}")
+message(STATUS "CMAKE_CURRENT_BINARY_DIR = ${CMAKE_CURRENT_BINARY_DIR}")

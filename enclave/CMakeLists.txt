@@ -1,6 +1,6 @@
 # the `pkg_check_modules` function is created with this call
 set(CMAKE_CXX_STANDARD 11)
-
+message(STATUS "CMAKE_CXX_COMPILER = ${CMAKE_CXX_COMPILER}")
 set(CMAKE_PREFIX_PATH "/opt/protobuf/lib/pkgconfig")
 set(ENV{PKG_CONFIG_PATH}  "/opt/protobuf/lib/pkgconfig")
 set(PROTOC  "/opt/protobuf/bin/protoc")
@@ -41,6 +41,6 @@ message(STATUS "PROTOBUF_OE_ENCLAVE_LDFLAGS = ${PROTOBUF_OE_ENCLAVE_LDFLAGS}")
 target_include_directories(enclave PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
 
 
-target_link_libraries(enclave openenclave::oeenclave openenclave::oelibc openenclave::oelibcxx ${PROTOBUF_OE_ENCLAVE_LDFLAGS})
+target_link_libraries(enclave ${PROTOBUF_OE_ENCLAVE_LDFLAGS} openenclave::oeenclave openenclave::oelibc openenclave::oelibcxx)
 
 message(STATUS "\n\n")

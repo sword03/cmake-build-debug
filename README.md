@@ -9,3 +9,4 @@ make
 ```bash
 host/helloworldhost enc/helloworldenc.so.signed
 ```
+ -Wl,-version-script=CMakeFiles/helloworld_host.dir/version.file
